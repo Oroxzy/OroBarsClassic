@@ -1,0 +1,8 @@
+## Interface: 80200
+## Title: OroBarsClassic
+## Version: 1.2
+## Author: jeremymeile@gmail.com
+## SavedVariables: globalSettings
+## SavedVariablesPerCharacter: characterSettings
+
+OroBarsClassic.lua
