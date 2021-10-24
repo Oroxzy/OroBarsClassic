@@ -38,16 +38,8 @@ Kill(ActionBarUpButton)
 Kill(ActionBarDownButton)
 Kill(MainMenuMaxLevelBar2)
 Kill(MainMenuMaxLevelBar3)
+Kill(KeyRingButton)
 
-
-		-- Rep
-	--ReputationWatchBarTexture2,
-	--ReputationWatchBarTexture3,
-	
-		-- Stance
-	--StanceBarLeft,
-	--StanceBarMiddle,
-	--StanceBarRight,
 for i = 1,12 do
     Kill(_G[('ActionButton%d'):format(i)])
 end
@@ -72,10 +64,22 @@ for _, texture in ipairs({
 	MainMenuXPBarTexture3,
 	MainMenuBarTexture2,
 	MainMenuBarTexture3,
+	KeyRingButton,
 	}) do
 	texture:SetTexture(nil)
 end
 
+	-- Hide Keyring
+	KeyRingButton:SetMovable(true)
+	KeyRingButton:SetUserPlaced(true)
+	KeyRingButton:ClearAllPoints()
+	KeyRingButton:Hide()
+	-- Hide TalentMicroButton
+	TalentMicroButton:SetMovable(true)
+	TalentMicroButton:SetUserPlaced(true)
+	TalentMicroButton:ClearAllPoints()
+	TalentMicroButton:Hide()
+	
 	-- Setwidth
 	local width = 512
 	MainMenuBar:SetWidth(width)
@@ -125,19 +129,24 @@ end
 		end
 	end
 
+	-- PetActionBarFrame
+	-- PetActionBarFrame:ClearAllPoints()
+	-- PetActionBarFrame:SetMovable(true)
+	-- PetActionBarFrame:SetUserPlaced(true)
+	-- local PetAction_yOffset = -30
+	-- if MultiBarBottomRight:IsVisible() then
+	-- 	PetActionBarFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, PetAction_yOffset)
+	-- elseif MultiBarBottomLeft:IsVisible() then
+	-- 	PetActionBarFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, PetAction_yOffset)
+	-- else
+	-- 	PetActionBarFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, PetAction_yOffset)
+	-- end
 
 	-- PetActionBarFrame
-	PetActionBarFrame:ClearAllPoints()
-	PetActionBarFrame:SetMovable(true)
-	PetActionBarFrame:SetUserPlaced(true)
-	local PetAction_yOffset = -30
-	if MultiBarBottomRight:IsVisible() then
-		PetActionBarFrame:SetPoint("BOTTOM", MultiBarBottomRight, "TOP", 0, PetAction_yOffset)
-	elseif MultiBarBottomLeft:IsVisible() then
-	  PetActionBarFrame:SetPoint("BOTTOM", MultiBarBottomLeft, "TOP", 0, PetAction_yOffset)
-	else
-	  PetActionBarFrame:SetPoint("BOTTOM", MainMenuBarArtFrame, "TOP", 0, PetAction_yOffset)
-	end
+	PetActionButton1:ClearAllPoints()
+	PetActionButton1:SetPoint("BOTTOM", MultiBarBottomRight, "TOP", -170, 4)
+	for i=1, 10 do _G["PetActionButton"..i]:SetParent(MultiBarBottomRight) end
+	RegisterStateDriver(PetActionBarFrame,"visibility", "hide")
 
 	MultiBarBottomLeft:ClearAllPoints()
 	local MultiBarBottomLeft_yOffset = -3
@@ -149,21 +158,9 @@ end
 	end
 
 		-- CastingBarFrame
+	CastingBarFrame:SetMovable(true)
+	CastingBarFrame:SetUserPlaced(true)
 	CastingBarFrame:ClearAllPoints()
 	local castBar_yOffset = 10
-	if MultiBarBottomRight:IsVisible() then
-		if PetActionBarFrame:IsVisible() then
-			CastingBarFrame:SetPoint("BOTTOM", MainMenuBarArtFrame, "TOP", 0, 120)
-		else
-			CastingBarFrame:SetPoint("BOTTOM", MultiBarBottomRight, "TOP", 0, castBar_yOffset)
-		end
-	elseif MultiBarBottomLeft:IsVisible() then
-		if PetActionBarFrame:IsVisible() then
-			CastingBarFrame:SetPoint("BOTTOM", MainMenuBarArtFrame, "TOP", 0, 80)
-		else
-			CastingBarFrame:SetPoint("BOTTOM", MultiBarBottomLeft, "TOP", 0, castBar_yOffset)
-		end
-	else
-		CastingBarFrame:SetPoint("BOTTOM", MainMenuBarArtFrame, "TOP", 0, castBar_yOffset)
-	end
+	CastingBarFrame:SetPoint("BOTTOM", MultiBarBottomRight, "TOP", 0, 120)
 
